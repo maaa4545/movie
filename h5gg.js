@@ -131,7 +131,6 @@ this.setting = {
                 });
 
 this.icon.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // これでタッチのデフォルト動作を無効化
     this.icon.IO.isDragging = true;
     const rect = this.icon.getBoundingClientRect();
     this.icon.IO.offset.x = e.touches[0].clientX - rect.left;
@@ -150,17 +149,6 @@ document.addEventListener("touchmove", (e) => {
     }
 });
 
-// touchend イベントをアイコンにだけ適用
-this.icon.addEventListener("touchend", (e) => {
-    // ドラッグが行われていなければタップとして扱い、setButtonAction を実行
-    if (!this.icon.IO.isDragging) {
-        this.setting.ButtonAction();
-    }
-
-    // ドラッグが終了した場合、状態をリセット
-    this.icon.IO.isDragging = false;
-    this.body.IO.isDragging = false;
-});
 
 
 
