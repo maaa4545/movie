@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="h5gg.js">
+setWindowRect(0,0,window.screen.height,window.screen.width);
+  </script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .video-background {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: #f8f8f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+    
+    .mod-menu {
+      background-color: rgba(40, 42, 54, 0.8);
+      width: 250px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 0px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    
+    .menu-header {
+      background-color: rgba(25, 26, 33, 0.9);
+      padding: 12px 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .menu-header svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .menu-button {
+      padding: 12px 15px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      align-items: center;
+    }
+    
+    .menu-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(8px);
+      z-index: -2;
+    }
+
+    .menu-button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.603);
+      opacity: 0;
+      transition: opacity 0.1s ease;
+      box-shadow: 0 0 10px #000;
+      z-index: -1;
+      background-repeat: no-repeat;
+      background-position: calc(100% - 0.5em) center;
+      background-size: 1em;
+    }
+
+    .menu-button.active::after {
+      opacity: 1;
+    }
+
+    .menu-button.active {
+      color: #ffffff;
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+.mod-menu.fade-in {
+    animation: fadeIn 0.25s ease forwards;
+}
+
+.mod-menu.fade-out {
+    animation: fadeOut 0.25s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+    .rainbow-text {
+      font-size: 24px;
+      background: linear-gradient(270deg, white);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 6s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .top-center {
+      position: absolute;
+      top: 10px;
+      text-align: center;
+    }
+
+    .bottom-center {
+      position: absolute;
+      bottom: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay loop muted class="video-background">
+    <source src="https://cdn.discordapp.com/attachments/1274542637252350034/1371456323715203192/MSNY2449.MP4?ex=682333bc&is=6821e23c&hm=cf1c2f468534eee3eccf45ae78785f8798a2f8d2672142ba4eed2aa7346cf89b&" type="video/mp4">
+  </video>
+
+  <div class="top-center rainbow-text">Modded By @2415ed8</div>
+  <div class="bottom-center rainbow-text">Modded By @2415ed8</div>
+
+  <div class="mod-menu">
+    <div class="menu-header">
+      KICHIGAI
+      <i class="fa-brands fa-telegram"></i>
+    </div>
+    
+    <div class="menu-button">Clipper</div>
+    <div class="menu-button">Fast Stop</div>
+    <div class="menu-button">Flight</div>
+    <div class="menu-button">High Jump</div>
+    <div class="menu-button">Inventory Move</div>
+    <div class="menu-button">Jump Cooldown</div>
+    <div class="menu-button">Speed Boost</div>
+    <div class="menu-button">No Fall Damage</div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.menu-button').forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+
+function A1() {
+    setWindowTouch(true);
+}
+
+function A2() {
+    setWindowTouch(false);
+}
+
+setButtonAction(() => {
+    const gui = document.querySelector(".mod-menu");
+    if (!gui) return;
+
+    if (gui.classList.contains("fade-out") || gui.style.display === "none") {
+        gui.style.display = "block";
+        gui.classList.remove("fade-out");
+        gui.classList.add("fade-in");
+        A1();
+    } else {
+        gui.classList.remove("fade-in");
+        gui.classList.add("fade-out");
+
+        gui.addEventListener("animationend", function handler() {
+            gui.style.display = "none";
+            gui.classList.remove("fade-out");
+            gui.removeEventListener("animationend", handler);
+        });
+        A2();
+    }
+});
+
+  </script>
+</body>
+</html>
