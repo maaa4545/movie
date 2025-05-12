@@ -15,21 +15,25 @@ if (!(navigator.userAgent.toLowerCase().includes("iphone") || navigator.userAgen
         constructor() {
             this.body = null;
             this.icon = document.createElement("img");
-            this.setting = {
-                ButtonAction: function () {
-                    if (document.body.style.display === "none") {
-                        document.body.style.display = "block";
-                    } else {
-                        document.body.style.display = "none";
-                    }
-                },
-                WindowDrag: {
-                    x: 0,
-                    y: 0,
-                    w: 0,
-                    h: 0
-                }
-            };
+this.setting = {
+    ButtonAction: function () {
+        const menu = document.querySelector(".mod-menu");
+        if (menu) {
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+    },
+    WindowDrag: {
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0
+    }
+};
+
 
             Object.defineProperty(Screen.prototype, "width", {
                 get: function () {
@@ -125,6 +129,41 @@ if (!(navigator.userAgent.toLowerCase().includes("iphone") || navigator.userAgen
                     this.icon.IO.isDragging = false;
                     this.body.IO.isDragging = false;
                 });
+
+this.icon.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // これでタッチのデフォルト動作を無効化
+    this.icon.IO.isDragging = true;
+    const rect = this.icon.getBoundingClientRect();
+    this.icon.IO.offset.x = e.touches[0].clientX - rect.left;
+    this.icon.IO.offset.y = e.touches[0].clientY - rect.top;
+    e.stopPropagation();
+});
+
+document.addEventListener("touchmove", (e) => {
+    if (this.icon.IO.isDragging) {
+        this.icon.style.left = `${e.touches[0].clientX - this.icon.IO.offset.x}px`;
+        this.icon.style.top = `${e.touches[0].clientY - this.icon.IO.offset.y}px`;
+    }
+    if (this.body.IO.isDragging) {
+        this.body.style.left = `${e.touches[0].clientX - this.body.IO.offset.x}px`;
+        this.body.style.top = `${e.touches[0].clientY - this.body.IO.offset.y}px`;
+    }
+});
+
+// touchend イベントをアイコンにだけ適用
+this.icon.addEventListener("touchend", (e) => {
+    // ドラッグが行われていなければタップとして扱い、setButtonAction を実行
+    if (!this.icon.IO.isDragging) {
+        this.setting.ButtonAction();
+    }
+
+    // ドラッグが終了した場合、状態をリセット
+    this.icon.IO.isDragging = false;
+    this.body.IO.isDragging = false;
+});
+
+
+
             });
 
             console.log("H5GG Success!!");
@@ -273,5 +312,14 @@ if (!(navigator.userAgent.toLowerCase().includes("iphone") || navigator.userAgen
 
     var setButtonImage = function (url) {
         console.log(`setButtonImage(${url});`);
+    }
+}
+
+function B1() {
+    const menu = document.querySelector(".mod-menu");
+    if (menu) {
+        menu.style.display = "none"; 
+        var locker = setInterval(() => {
+        }, 15);
     }
 }
