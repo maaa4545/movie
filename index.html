@@ -170,18 +170,18 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
 
   <div class="mod-menu">
     <div class="menu-header">
-      KICHIGAI
+      Discord @2415ed8
       <i class="fa-brands fa-telegram"></i>
     </div>
     
-    <div class="menu-button">Clipper</div>
-    <div class="menu-button">Fast Stop</div>
-    <div class="menu-button">Flight</div>
-    <div class="menu-button">High Jump</div>
+    <div class="menu-button">バトロワ武器改造</div>
+    <div class="menu-button">ハイスピード</div>
+    <div class="menu-button">ハイジャンプ</div>
+    <div class="menu-button">無限ジャンプ</div>
     <div class="menu-button">Inventory Move</div>
     <div class="menu-button">Jump Cooldown</div>
     <div class="menu-button">Speed Boost</div>
-    <div class="menu-button">No Fall Damage</div>
+    <div class="menu-button" onclick="B1()">No Fall Damage</div>
   </div>
 
   <script>
@@ -190,6 +190,7 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
         this.classList.toggle('active');
       });
     });
+
 
 function A1() {
     setWindowTouch(true);
@@ -221,6 +222,65 @@ setButtonAction(() => {
     }
 });
 
+        document.getElementById('icon').addEventListener('click', function() {
+            setButtonAction(); 
+        });
+
+
+        
   </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menu = document.querySelector(".mod-menu");
+
+    if (!menu) return;
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    menu.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        const rect = menu.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+            menu.style.left = `${e.clientX - offsetX}px`;
+            menu.style.top = `${e.clientY - offsetY}px`;
+            menu.style.transform = `none`; 
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+
+
+    menu.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        const rect = menu.getBoundingClientRect();
+        offsetX = e.touches[0].clientX - rect.left;
+        offsetY = e.touches[0].clientY - rect.top;
+    });
+
+    document.addEventListener("touchmove", (e) => {
+        if (isDragging) {
+            menu.style.left = `${e.touches[0].clientX - offsetX}px`;
+            menu.style.top = `${e.touches[0].clientY - offsetY}px`;
+            menu.style.transform = `none`;
+        }
+    });
+
+    document.addEventListener("touchend", () => {
+        isDragging = false;
+    });
+});
+</script>
+
 </body>
 </html>
