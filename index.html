@@ -10,6 +10,8 @@
   <script src="h5gg.js">
 setWindowRect(0,0,window.screen.height,window.screen.width);
   </script>
+   <script src="script.js">
+   </script>
   <style>
     body, html {
       margin: 0;
@@ -25,7 +27,14 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
       transform: translate(-50%, -50%);
       width: 100%;
       height: 100%;
+      background-image: url(./v1.png);
       z-index: -1;
+
+        background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
     }
 
     body {
@@ -37,31 +46,39 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
       user-select: none;
     }
     
-    .mod-menu {
-      background-color: rgba(40, 42, 54, 0.8);
-      width: 250px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 5px;
-      overflow: hidden;
-      box-shadow: 0 0px 20px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      z-index: 10;
-    }
+.mod-menu {
+  text-align: center;
+  background-color: #000000cc;
+  width: 250px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(10px);
+  height: 448px;
+  overflow-y: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-radius: 4px;
+}
+.mod-menu::-webkit-scrollbar {
+  display: none;
+}
     
-    .menu-header {
-      background-color: rgba(25, 26, 33, 0.9);
-      padding: 12px 15px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 2;
-    }
+.menu-header {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  padding: 17px 15px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+  background-color: rgb(0, 0, 0);
+}
+
     
     .menu-header svg {
       width: 18px;
@@ -69,24 +86,25 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
     }
     
     .menu-button {
-      padding: 12px 15px;
+      padding: 17px 15px;
       cursor: pointer;
       transition: all 0.1s ease;
       position: relative;
       overflow: hidden;
       z-index: 1;
       align-items: center;
+      text-align: center;
     }
     
     .menu-button::before {
-      content: "";
+      content: none;
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      filter: blur(8px);
-      z-index: -2;
+      background-color: #00000083;
+      z-index: -1;
     }
 
     .menu-button::after {
@@ -96,9 +114,9 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.603);
+      background-color: rgba(255, 255, 255, 0.13);
       opacity: 0;
-      transition: opacity 0.1s ease;
+      transition: opacity 0.3s ease;
       box-shadow: 0 0 10px #000;
       z-index: -1;
       background-repeat: no-repeat;
@@ -120,7 +138,7 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
 }
 
 .mod-menu.fade-out {
-    animation: fadeOut 0.25s ease forwards;
+     animation: fadeOut 0.2s ease-in forwards;
 }
 
 @keyframes fadeIn {
@@ -129,51 +147,69 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to   { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
-    .rainbow-text {
-      font-size: 24px;
-      background: linear-gradient(270deg, white);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rainbow 6s linear infinite;
-    }
+@keyframes fadeOutDragged {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+
+.rainbow-text {
+  position: relative;
+  font-size: 20px;
+  background: linear-gradient(270deg, #ffffff, #000000, white);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 2s linear infinite;
+}
+
+
 
     @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      0% { background-position: 0%; }
+      50% { background-position: 100%; }
+      100% { background-position: 200%; }
     }
 
     .top-center {
       position: absolute;
-      top: 10px;
+      top: 5px;
       text-align: center;
     }
 
     .bottom-center {
       position: absolute;
-      bottom: 20px;
+      bottom: 5px;
       text-align: center;
     }
   </style>
 </head>
 <body>
   <video autoplay loop muted class="video-background">
-    <source src="https://cdn.discordapp.com/attachments/1274542637252350034/1371474236996321321/0512_1.mp4?ex=6823446a&is=6821f2ea&hm=d0c4b5043e2e69101c9e52e08b04c0b57082b85a5da99c95fa1578d1ec2aa014&" type="video/mp4">
-  </video>
+</video>
 
-  <div class="top-center rainbow-text">Modded By @2415ed8</div>
+  <div class="top-center rainbow-text" data-text="Modded By 2415ed8">Modded By @2415ed8</div>
   <div class="bottom-center rainbow-text">Modded By @2415ed8</div>
 
   <div class="mod-menu">
     <div class="menu-header">
-      Discord @2415ed8
-      <i class="fa-brands fa-telegram"></i>
+      @nakadashiOwO
+      <i class="fa-brands fa-twitter"></i>
     </div>
-    
     <div class="menu-button">バトロワ武器改造</div>
     <div class="menu-button">ハイスピード</div>
     <div class="menu-button">ハイジャンプ</div>
@@ -181,7 +217,7 @@ setWindowRect(0,0,window.screen.height,window.screen.width);
     <div class="menu-button">Inventory Move</div>
     <div class="menu-button">Jump Cooldown</div>
     <div class="menu-button">Speed Boost</div>
-    <div class="menu-button" onclick="B1()">No Fall Damage</div>
+    <div class="menu-button" onclick="Af4()">No Fall Damage</div>
   </div>
 
   <script>
@@ -222,63 +258,91 @@ setButtonAction(() => {
     }
 });
 
-        document.getElementById('icon').addEventListener('click', function() {
-            setButtonAction(); 
-        });
-
 
         
   </script>
 
   <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.querySelector(".mod-menu");
-
-    if (!menu) return;
-
-    let isDragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    menu.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        const rect = menu.getBoundingClientRect();
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
-        e.preventDefault();
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-            menu.style.left = `${e.clientX - offsetX}px`;
-            menu.style.top = `${e.clientY - offsetY}px`;
-            menu.style.transform = `none`; 
+  const menu = document.querySelector(".mod-menu");
+  const menuHeader = document.querySelector(".menu-header");
+  
+  if (!menu || !menuHeader) return;
+  
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+  let wasDragged = false;
+  
+  const initialTransform = getComputedStyle(menu).transform;
+  
+  const startDragging = (clientX, clientY) => {
+    isDragging = true;
+    wasDragged = true;
+    
+    const rect = menu.getBoundingClientRect();
+    
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const offsetFromCenterX = centerX - window.innerWidth / 2;
+    const offsetFromCenterY = centerY - window.innerHeight / 2;
+    
+    menu.style.left = `${rect.left}px`;
+    menu.style.top = `${rect.top}px`;
+    menu.style.transform = 'none';
+    
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+    
+    menu.classList.remove('fadeOut');
+  };
+  
+  menuHeader.addEventListener("mousedown", (e) => {
+    startDragging(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      menu.style.left = `${e.clientX - offsetX}px`;
+      menu.style.top = `${e.clientY - offsetY}px`;
+    }
+  });
+  
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+  
+  menuHeader.addEventListener("touchstart", (e) => {
+    startDragging(e.touches[0].clientX, e.touches[0].clientY);
+    e.preventDefault();
+  });
+  
+  document.addEventListener("touchmove", (e) => {
+    if (isDragging) {
+      menu.style.left = `${e.touches[0].clientX - offsetX}px`;
+      menu.style.top = `${e.touches[0].clientY - offsetY}px`;
+    }
+  });
+  
+  document.addEventListener("touchend", () => {
+    isDragging = false;
+  });
+  
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (menu.classList.contains('fadeOut') && wasDragged) {
+          menu.style.animation = 'none';
+          menu.style.opacity = '0';
+          menu.style.transition = 'opacity 0.3s ease-out';
         }
+      }
     });
-
-    document.addEventListener("mouseup", () => {
-        isDragging = false;
-    });
-
-
-    menu.addEventListener("touchstart", (e) => {
-        isDragging = true;
-        const rect = menu.getBoundingClientRect();
-        offsetX = e.touches[0].clientX - rect.left;
-        offsetY = e.touches[0].clientY - rect.top;
-    });
-
-    document.addEventListener("touchmove", (e) => {
-        if (isDragging) {
-            menu.style.left = `${e.touches[0].clientX - offsetX}px`;
-            menu.style.top = `${e.touches[0].clientY - offsetY}px`;
-            menu.style.transform = `none`;
-        }
-    });
-
-    document.addEventListener("touchend", () => {
-        isDragging = false;
-    });
+  });
+  
+  observer.observe(menu, { attributes: true });
 });
 </script>
 
